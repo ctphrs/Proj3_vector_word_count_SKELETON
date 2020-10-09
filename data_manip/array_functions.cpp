@@ -59,9 +59,9 @@ namespace KP{
 		//Make an upper token that we can use
 		std::string upper_token = token;
 		toUpper(upper_token);
-		//look for match with another entry
+		//look for match with another entry and save the index of that entry in our vector
         int index = -1;
-        for(int i = 0; i < entries.size(); i++){
+        for(unsigned int i = 0; i < entries.size(); i++){
             if (entries[i].word_uppercase == upper_token){
                 index = i;
                 break;
@@ -84,7 +84,7 @@ namespace KP{
 	 * The presence of the enum implies a switch statement based on its value
 	 * See the course lectures and demo project for how to sort a vector of structs
 	 */
-	//define compare functions
+	//define compare functions for our enum entries
 	bool compare_asc(constants::entry &a, constants::entry &b){
 		return a.word_uppercase<b.word_uppercase;
 	}
