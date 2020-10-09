@@ -37,7 +37,7 @@ int writetoFile(std::vector<constants::entry>  &entries, const std::string &outp
 	if(entries.size()==0)
 		return constants::FAIL_NO_ARRAY_DATA;
 	for(int i=0; i<entries.size(); i++)
-			outfile<<entries[i].word<<std::endl;
+			outfile<<entries[i].word<<" "<<entries[i].number_occurences<<std::endl;
 
 	return constants::SUCCESS;
 }

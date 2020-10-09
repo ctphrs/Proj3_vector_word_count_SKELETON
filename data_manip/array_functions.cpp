@@ -56,22 +56,24 @@ namespace KP{
 		if(!strip_unwanted_chars(token)){
 		            return;
 		        }
-		        int index = -1;
-		        for(int i = 0; i < entries.size(); i++){
-		            if (entries[i].word == token){
-		                index = i;
-		                break;
-		            }
-		        }
-		        if (index == -1){
-		            std::string upper_token = token;
-		            toUpper(upper_token);
-		            constants::entry new_entry = {token, upper_token, 1};
-		            entries.push_back(new_entry);
-		        }
-		        else {
-		            entries[index].number_occurences += 1;
-		        }
+
+		std::string upper_token = token;
+		toUpper(upper_token);
+
+        int index = -1;
+        for(int i = 0; i < entries.size(); i++){
+            if (entries[i].word_uppercase == upper_token){
+                index = i;
+                break;
+            }
+        }
+        if (index == -1){
+            constants::entry new_entry = {token, upper_token, 1};
+            entries.push_back(new_entry);
+        }
+        else {
+            entries[index].number_occurences += 1;
+        }
 
 	}
 	/*
@@ -81,10 +83,10 @@ namespace KP{
 	 * See the course lectures and demo project for how to sort a vector of structs
 	 */
 	bool compare_asc(constants::entry &a, constants::entry &b){
-		return a.word<b.word;
+		return a.word_uppercase<b.word_uppercase;
 	}
 	bool compare_dec(constants::entry &a, constants::entry &b){
-			return a.word>b.word;
+			return a.word_uppercase>b.word_uppercase;
 		}
 	bool compare_num(constants::entry &a, constants::entry &b){
 			return a.number_occurences>b.number_occurences;
