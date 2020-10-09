@@ -34,5 +34,10 @@ int writetoFile(std::vector<constants::entry>  &entries, const std::string &outp
 
 	if(!outfile.is_open())
 		return constants::FAIL_FILE_DID_NOT_OPEN;
+	if(entries.size()==0)
+		return constants::FAIL_NO_ARRAY_DATA;
+	for(int i=0; i<entries.size(); i++)
+			outfile<<entries[i].word<<std::endl;
 
+	return constants::SUCCESS;
 }
