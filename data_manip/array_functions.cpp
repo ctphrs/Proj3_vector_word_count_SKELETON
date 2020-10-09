@@ -52,14 +52,14 @@ namespace KP{
 	}
 	/*Keep track of how many times each token seen*/
 	void processToken(std::vector<constants::entry> &entries, std::string &token) {
-
+		//Strip unwanted char and bump out if empty
 		if(!strip_unwanted_chars(token)){
 		            return;
 		        }
-
+		//Make an upper token that we can use
 		std::string upper_token = token;
 		toUpper(upper_token);
-
+		//look for match with another entry
         int index = -1;
         for(int i = 0; i < entries.size(); i++){
             if (entries[i].word_uppercase == upper_token){
@@ -67,10 +67,12 @@ namespace KP{
                 break;
             }
         }
+        //if no match was found make a new entry
         if (index == -1){
             constants::entry new_entry = {token, upper_token, 1};
             entries.push_back(new_entry);
         }
+        //add to number of occurences
         else {
             entries[index].number_occurences += 1;
         }
@@ -82,6 +84,7 @@ namespace KP{
 	 * The presence of the enum implies a switch statement based on its value
 	 * See the course lectures and demo project for how to sort a vector of structs
 	 */
+	//define compare functions
 	bool compare_asc(constants::entry &a, constants::entry &b){
 		return a.word_uppercase<b.word_uppercase;
 	}
@@ -91,7 +94,6 @@ namespace KP{
 	bool compare_num(constants::entry &a, constants::entry &b){
 			return a.number_occurences>b.number_occurences;
 		}
-
 	void sort(std::vector<constants::entry>  &entries, constants::sortOrder so){
 		if(so == constants::NONE){
 			return;
