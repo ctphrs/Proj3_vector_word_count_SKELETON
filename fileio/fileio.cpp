@@ -5,16 +5,20 @@
 #include <string>
 
 #include "../includes/constants.h"
+#include "../includes/utilities.h"
+
 /*if you are debugging the file must be in the project parent directory
   in this case Project2 with the .project and .cProject files*/
 bool openFile(std::fstream& myfile, const std::string& myFileName,
 		std::ios_base::openmode mode = std::ios_base::in){
-	return true; //Unimplementerd
+	myfile.open(myFileName, mode);
+	return myfile.is_open();
 }
 
 /*iff myfile is open then close it*/
 void closeFile(std::fstream& myfile){
-	//Unimplemented
+	if (myfile.is_open())
+		myfile.close();
 }
 
 /* serializes all content in entries to file outputfilename
@@ -24,5 +28,11 @@ void closeFile(std::fstream& myfile){
  * 			SUCCESS if all data is written and outputfilename closes OK
  * */
 int writetoFile(std::vector<constants::entry>  &entries, const std::string &outputfilename){
-	return 3; //Unimplemented
+
+	std::ofstream outfile;
+	outfile.open(outputfilename);
+
+	if(!outfile.is_open())
+		return constants::FAIL_FILE_DID_NOT_OPEN;
+
 }
