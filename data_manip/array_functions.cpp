@@ -94,7 +94,6 @@ namespace KP{
 	bool compare_num(constants::entry &a, constants::entry &b){
 			return a.number_occurences>b.number_occurences;
 		}
-	//test
 	void sort(std::vector<constants::entry>  &entries, constants::sortOrder so){
 		if(so == constants::NONE){
 			return;
