@@ -2,7 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
-
+#include <algorithm>
 #include <vector>
 #include "../includes/constants.h"
 #include "../includes/array_functions.h"
@@ -72,21 +72,7 @@ namespace KP{
 		        else {
 		            entries[index].number_occurences += 1;
 		        }
-//Coulf not get this code to work so did it another way
-//		for(int i=0; i<entries.size(); i++){
-//			strip_unwanted_chars(token);
-//		           if(token!=entries[i].word){
-//		               // Make a version of the token thats uppercase to store in our new struct
-//		               std::string token_upper = token;
-//		               toUpper(token_upper);
-//		               // Make a new entry struct with the value of token
-//		               constants::entry entry_token{token, token_upper,1};
-//		               entries.push_back(entry_token);
-//		                }
-//		                if(token==entries[i].word){
-//		                    entries[i].number_occurences++;
-//		            }
-//		        }
+
 	}
 	/*
 	 * Sort myEntryArray based on so enum value.
@@ -94,7 +80,28 @@ namespace KP{
 	 * The presence of the enum implies a switch statement based on its value
 	 * See the course lectures and demo project for how to sort a vector of structs
 	 */
-	void sort(std::vector<constants::entry>  &entries, constants::sortOrder so){
+	bool compare_asc(constants::entry &a, constants::entry &b){
+		return a.word<b.word;
+	}
+	bool compare_dec(constants::entry &a, constants::entry &b){
+			return a.word>b.word;
+		}
+	bool compare_num(constants::entry &a, constants::entry &b){
+			return a.number_occurences>b.number_occurences;
+		}
 
+	void sort(std::vector<constants::entry>  &entries, constants::sortOrder so){
+		if(so == constants::NONE){
+			return;
+		}
+		if(so == constants::ASCENDING){
+			sort(entries.begin(), entries.end(), compare_asc);
+				}
+		if(so == constants::DESCENDING){
+					sort(entries.begin(), entries.end(), compare_dec);
+						}
+		if(so == constants::NUMBER_OCCURRENCES){
+							sort(entries.begin(), entries.end(), compare_num);
+								}
 	}
 }
